@@ -1,0 +1,352 @@
+{
+  "version": "16.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "LambdaRdsExampleStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "LambdaRdsExampleStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "LambdaRdsExampleStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "LambdaRdsExampleStack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/8df67326f53eac432933d11f7963a765093e1d46281b8e0e2a00350f82ca6ff2.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "LambdaRdsExampleStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "LambdaRdsExampleStack.assets"
+      ],
+      "metadata": {
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpc2146D468"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsPublicsubnetSubnet1Subnet8CCCDC3A"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsPublicsubnetSubnet1RouteTable36AD90C0"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsPublicsubnetSubnet1RouteTableAssociation125A6BED"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsPublicsubnetSubnet1DefaultRoute2EFC7319"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsPublicsubnetSubnet2Subnet7D22E939"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsPublicsubnetSubnet2RouteTable29ADC0E5"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsPublicsubnetSubnet2RouteTableAssociation8F998F20"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsPublicsubnetSubnet2DefaultRoute4A30080A"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsIsolatedsubnetSubnet1Subnet697E5C8E"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsIsolatedsubnetSubnet1RouteTable498264AE"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsIsolatedsubnetSubnet1RouteTableAssociation0647B35D"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsIsolatedsubnetSubnet2SubnetD75D6AC4"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsIsolatedsubnetSubnet2RouteTable4C0B8CFE"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsIsolatedsubnetSubnet2RouteTableAssociation31E279C7"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpcIGWEFE62065"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpcVPCGW27DEE561"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-l2proxy-sg/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsl2proxysg314C9929"
+          }
+        ],
+        "/LambdaRdsExampleStack/bastionsg/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bastionsg1FA4DDAF"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-proxy2db-sg/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsproxy2dbsg08928C4C"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-proxy2db-sg/from LambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30:3306": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsproxy2dbsgfromLambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30330635466EB8"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-proxy2db-sg/from LambdaRdsExampleStacklambdardsl2proxysgDD528680:3306": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsproxy2dbsgfromLambdaRdsExampleStacklambdardsl2proxysgDD5286803306F8DFE51F"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-proxy2db-sg/from LambdaRdsExampleStackbastionsg99B5FE95:3306": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsproxy2dbsgfromLambdaRdsExampleStackbastionsg99B5FE9533061D609738"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-proxy2db-sg/from LambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30:{IndirectPort}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsproxy2dbsgfromLambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30IndirectPortDD0FEF05"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-DBCredentialsSecret/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsDBCredentialsSecretC599BE51"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-DBCredentialsSecret/Attachment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsDBCredentialsSecretAttachment0482F28D"
+          }
+        ],
+        "/LambdaRdsExampleStack/DBCredentialsArn/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DBCredentialsArn15122902"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-DBInstance/SubnetGroup/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsDBInstanceSubnetGroup6038D7B3"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-DBInstance/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsDBInstanceE24F7D33"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-DBInstance/LambdaRdsExampleStack-proxy/IAMRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsDBInstanceLambdaRdsExampleStackproxyIAMRoleE947A59C"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-DBInstance/LambdaRdsExampleStack-proxy/IAMRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsDBInstanceLambdaRdsExampleStackproxyIAMRoleDefaultPolicy71711129"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-DBInstance/LambdaRdsExampleStack-proxy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsDBInstanceLambdaRdsExampleStackproxy55C1F702"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-DBInstance/LambdaRdsExampleStack-proxy/ProxyTargetGroup": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsDBInstanceLambdaRdsExampleStackproxyProxyTargetGroup16334F5A"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-bastion-host/InstanceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsbastionhostInstanceRole4B673ACA"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-bastion-host/InstanceProfile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsbastionhostInstanceProfileEC3D51F2"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-bastion-host/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsbastionhost66F0DE4B"
+          }
+        ],
+        "/LambdaRdsExampleStack/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-function/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsfunctionServiceRoleD993BA2C"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-function/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsfunctionC38F4446"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Test API Lambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsTestAPILambdaA9255498"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Test API Lambda/DefaultRoute/lb1-lambda-proxy-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsTestAPILambdaDefaultRoutelb1lambdaproxyPermission1E941BC2"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Test API Lambda/DefaultRoute/lb1-lambda-proxy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsTestAPILambdaDefaultRoutelb1lambdaproxy5DFB1EFD"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Test API Lambda/DefaultRoute/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsTestAPILambdaDefaultRoute05139912"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Test API Lambda/DefaultStage/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsTestAPILambdaDefaultStage6C0C8D45"
+          }
+        ],
+        "/LambdaRdsExampleStack/PublicIp": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PublicIp"
+          }
+        ],
+        "/LambdaRdsExampleStack/HTTP API Url": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HTTPAPIUrl"
+          }
+        ],
+        "/LambdaRdsExampleStack/dbEndpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "dbEndpoint"
+          }
+        ],
+        "/LambdaRdsExampleStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/LambdaRdsExampleStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/LambdaRdsExampleStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/LambdaRdsExampleStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "LambdaRdsExampleStack"
+    }
+  }
+}

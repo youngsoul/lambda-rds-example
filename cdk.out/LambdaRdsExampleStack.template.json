@@ -1,0 +1,1338 @@
+{
+  "Resources": {
+    "lambdardsVpc2146D468": {
+      "Type": "AWS::EC2::VPC",
+      "Properties": {
+        "CidrBlock": "10.40.0.0/16",
+        "EnableDnsHostnames": true,
+        "EnableDnsSupport": true,
+        "InstanceTenancy": "default",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LambdaRdsExampleStack/lambda-rds-Vpc"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/Resource"
+      }
+    },
+    "lambdardsVpclambdardsPublicsubnetSubnet1Subnet8CCCDC3A": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "CidrBlock": "10.40.0.0/24",
+        "VpcId": {
+          "Ref": "lambdardsVpc2146D468"
+        },
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
+        },
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "lambda-rds-Public-subnet"
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public"
+          },
+          {
+            "Key": "Name",
+            "Value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1/Subnet"
+      }
+    },
+    "lambdardsVpclambdardsPublicsubnetSubnet1RouteTable36AD90C0": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "lambdardsVpc2146D468"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1/RouteTable"
+      }
+    },
+    "lambdardsVpclambdardsPublicsubnetSubnet1RouteTableAssociation125A6BED": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "lambdardsVpclambdardsPublicsubnetSubnet1RouteTable36AD90C0"
+        },
+        "SubnetId": {
+          "Ref": "lambdardsVpclambdardsPublicsubnetSubnet1Subnet8CCCDC3A"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1/RouteTableAssociation"
+      }
+    },
+    "lambdardsVpclambdardsPublicsubnetSubnet1DefaultRoute2EFC7319": {
+      "Type": "AWS::EC2::Route",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "lambdardsVpclambdardsPublicsubnetSubnet1RouteTable36AD90C0"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "lambdardsVpcIGWEFE62065"
+        }
+      },
+      "DependsOn": [
+        "lambdardsVpcVPCGW27DEE561"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1/DefaultRoute"
+      }
+    },
+    "lambdardsVpclambdardsPublicsubnetSubnet2Subnet7D22E939": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "CidrBlock": "10.40.1.0/24",
+        "VpcId": {
+          "Ref": "lambdardsVpc2146D468"
+        },
+        "AvailabilityZone": {
+          "Fn::Select": [
+            1,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
+        },
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "lambda-rds-Public-subnet"
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public"
+          },
+          {
+            "Key": "Name",
+            "Value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet2"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet2/Subnet"
+      }
+    },
+    "lambdardsVpclambdardsPublicsubnetSubnet2RouteTable29ADC0E5": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "lambdardsVpc2146D468"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet2"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet2/RouteTable"
+      }
+    },
+    "lambdardsVpclambdardsPublicsubnetSubnet2RouteTableAssociation8F998F20": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "lambdardsVpclambdardsPublicsubnetSubnet2RouteTable29ADC0E5"
+        },
+        "SubnetId": {
+          "Ref": "lambdardsVpclambdardsPublicsubnetSubnet2Subnet7D22E939"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet2/RouteTableAssociation"
+      }
+    },
+    "lambdardsVpclambdardsPublicsubnetSubnet2DefaultRoute4A30080A": {
+      "Type": "AWS::EC2::Route",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "lambdardsVpclambdardsPublicsubnetSubnet2RouteTable29ADC0E5"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "lambdardsVpcIGWEFE62065"
+        }
+      },
+      "DependsOn": [
+        "lambdardsVpcVPCGW27DEE561"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet2/DefaultRoute"
+      }
+    },
+    "lambdardsVpclambdardsIsolatedsubnetSubnet1Subnet697E5C8E": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "CidrBlock": "10.40.2.0/24",
+        "VpcId": {
+          "Ref": "lambdardsVpc2146D468"
+        },
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
+        },
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "lambda-rds-Isolated-subnet"
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Isolated"
+          },
+          {
+            "Key": "Name",
+            "Value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet1"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet1/Subnet"
+      }
+    },
+    "lambdardsVpclambdardsIsolatedsubnetSubnet1RouteTable498264AE": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "lambdardsVpc2146D468"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet1"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet1/RouteTable"
+      }
+    },
+    "lambdardsVpclambdardsIsolatedsubnetSubnet1RouteTableAssociation0647B35D": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet1RouteTable498264AE"
+        },
+        "SubnetId": {
+          "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet1Subnet697E5C8E"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet1/RouteTableAssociation"
+      }
+    },
+    "lambdardsVpclambdardsIsolatedsubnetSubnet2SubnetD75D6AC4": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "CidrBlock": "10.40.3.0/24",
+        "VpcId": {
+          "Ref": "lambdardsVpc2146D468"
+        },
+        "AvailabilityZone": {
+          "Fn::Select": [
+            1,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
+        },
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "lambda-rds-Isolated-subnet"
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Isolated"
+          },
+          {
+            "Key": "Name",
+            "Value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet2"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet2/Subnet"
+      }
+    },
+    "lambdardsVpclambdardsIsolatedsubnetSubnet2RouteTable4C0B8CFE": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "lambdardsVpc2146D468"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet2"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet2/RouteTable"
+      }
+    },
+    "lambdardsVpclambdardsIsolatedsubnetSubnet2RouteTableAssociation31E279C7": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet2RouteTable4C0B8CFE"
+        },
+        "SubnetId": {
+          "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet2SubnetD75D6AC4"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet2/RouteTableAssociation"
+      }
+    },
+    "lambdardsVpcIGWEFE62065": {
+      "Type": "AWS::EC2::InternetGateway",
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LambdaRdsExampleStack/lambda-rds-Vpc"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/IGW"
+      }
+    },
+    "lambdardsVpcVPCGW27DEE561": {
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+      "Properties": {
+        "VpcId": {
+          "Ref": "lambdardsVpc2146D468"
+        },
+        "InternetGatewayId": {
+          "Ref": "lambdardsVpcIGWEFE62065"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/VPCGW"
+      }
+    },
+    "lambdardsl2proxysg314C9929": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Lambda to RDS Proxy Connection",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1"
+          }
+        ],
+        "VpcId": {
+          "Ref": "lambdardsVpc2146D468"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-l2proxy-sg/Resource"
+      }
+    },
+    "bastionsg1FA4DDAF": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "lambda-rds SG for Bastion",
+        "GroupName": "lambda-rds-cdk-bastion-sg",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1"
+          }
+        ],
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": "73.209.223.60/32",
+            "Description": "SSH Access",
+            "FromPort": 22,
+            "IpProtocol": "tcp",
+            "ToPort": 22
+          }
+        ],
+        "VpcId": {
+          "Ref": "lambdardsVpc2146D468"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/bastionsg/Resource"
+      }
+    },
+    "lambdardsproxy2dbsg08928C4C": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Proxy to DB Connection",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1"
+          }
+        ],
+        "VpcId": {
+          "Ref": "lambdardsVpc2146D468"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-proxy2db-sg/Resource"
+      }
+    },
+    "lambdardsproxy2dbsgfromLambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30330635466EB8": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "IpProtocol": "tcp",
+        "Description": "allow db connection",
+        "FromPort": 3306,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "lambdardsproxy2dbsg08928C4C",
+            "GroupId"
+          ]
+        },
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "lambdardsproxy2dbsg08928C4C",
+            "GroupId"
+          ]
+        },
+        "ToPort": 3306
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-proxy2db-sg/from LambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30:3306"
+      }
+    },
+    "lambdardsproxy2dbsgfromLambdaRdsExampleStacklambdardsl2proxysgDD5286803306F8DFE51F": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "IpProtocol": "tcp",
+        "Description": "allow lambda connection",
+        "FromPort": 3306,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "lambdardsproxy2dbsg08928C4C",
+            "GroupId"
+          ]
+        },
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "lambdardsl2proxysg314C9929",
+            "GroupId"
+          ]
+        },
+        "ToPort": 3306
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-proxy2db-sg/from LambdaRdsExampleStacklambdardsl2proxysgDD528680:3306"
+      }
+    },
+    "lambdardsproxy2dbsgfromLambdaRdsExampleStackbastionsg99B5FE9533061D609738": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "IpProtocol": "tcp",
+        "Description": "allow ec2 connection",
+        "FromPort": 3306,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "lambdardsproxy2dbsg08928C4C",
+            "GroupId"
+          ]
+        },
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "bastionsg1FA4DDAF",
+            "GroupId"
+          ]
+        },
+        "ToPort": 3306
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-proxy2db-sg/from LambdaRdsExampleStackbastionsg99B5FE95:3306"
+      }
+    },
+    "lambdardsproxy2dbsgfromLambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30IndirectPortDD0FEF05": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "IpProtocol": "tcp",
+        "Description": "Allow connections to the database Instance from the Proxy",
+        "FromPort": {
+          "Fn::GetAtt": [
+            "lambdardsDBInstanceE24F7D33",
+            "Endpoint.Port"
+          ]
+        },
+        "GroupId": {
+          "Fn::GetAtt": [
+            "lambdardsproxy2dbsg08928C4C",
+            "GroupId"
+          ]
+        },
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "lambdardsproxy2dbsg08928C4C",
+            "GroupId"
+          ]
+        },
+        "ToPort": {
+          "Fn::GetAtt": [
+            "lambdardsDBInstanceE24F7D33",
+            "Endpoint.Port"
+          ]
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-proxy2db-sg/from LambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30:{IndirectPort}"
+      }
+    },
+    "lambdardsDBCredentialsSecretC599BE51": {
+      "Type": "AWS::SecretsManager::Secret",
+      "Properties": {
+        "GenerateSecretString": {
+          "ExcludePunctuation": true,
+          "GenerateStringKey": "password",
+          "IncludeSpace": false,
+          "SecretStringTemplate": "{\"username\": \"retireddev\"}"
+        },
+        "Name": "LambdaRdsExampleStack-rds-credentials"
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete",
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-DBCredentialsSecret/Resource"
+      }
+    },
+    "lambdardsDBCredentialsSecretAttachment0482F28D": {
+      "Type": "AWS::SecretsManager::SecretTargetAttachment",
+      "Properties": {
+        "SecretId": {
+          "Ref": "lambdardsDBCredentialsSecretC599BE51"
+        },
+        "TargetId": {
+          "Ref": "lambdardsDBInstanceE24F7D33"
+        },
+        "TargetType": "AWS::RDS::DBInstance"
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-DBCredentialsSecret/Attachment/Resource"
+      }
+    },
+    "DBCredentialsArn15122902": {
+      "Type": "AWS::SSM::Parameter",
+      "Properties": {
+        "Type": "String",
+        "Value": {
+          "Ref": "lambdardsDBCredentialsSecretC599BE51"
+        },
+        "Name": "rds-credentials-arn"
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/DBCredentialsArn/Resource"
+      }
+    },
+    "lambdardsDBInstanceSubnetGroup6038D7B3": {
+      "Type": "AWS::RDS::DBSubnetGroup",
+      "Properties": {
+        "DBSubnetGroupDescription": "Subnet group for lambda-rds-DBInstance database",
+        "SubnetIds": [
+          {
+            "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet1Subnet697E5C8E"
+          },
+          {
+            "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet2SubnetD75D6AC4"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-DBInstance/SubnetGroup/Default"
+      }
+    },
+    "lambdardsDBInstanceE24F7D33": {
+      "Type": "AWS::RDS::DBInstance",
+      "Properties": {
+        "DBInstanceClass": "db.t2.micro",
+        "AllocatedStorage": "100",
+        "CopyTagsToSnapshot": true,
+        "DBName": "testdb",
+        "DBSubnetGroupName": {
+          "Ref": "lambdardsDBInstanceSubnetGroup6038D7B3"
+        },
+        "DeletionProtection": false,
+        "Engine": "mysql",
+        "EngineVersion": "8.0.16",
+        "MasterUsername": {
+          "Fn::Join": [
+            "",
+            [
+              "{{resolve:secretsmanager:",
+              {
+                "Ref": "lambdardsDBCredentialsSecretC599BE51"
+              },
+              ":SecretString:username::}}"
+            ]
+          ]
+        },
+        "MasterUserPassword": {
+          "Fn::Join": [
+            "",
+            [
+              "{{resolve:secretsmanager:",
+              {
+                "Ref": "lambdardsDBCredentialsSecretC599BE51"
+              },
+              ":SecretString:password::}}"
+            ]
+          ]
+        },
+        "MultiAZ": false,
+        "Port": "3306",
+        "PubliclyAccessible": false,
+        "StorageType": "gp2",
+        "VPCSecurityGroups": [
+          {
+            "Fn::GetAtt": [
+              "lambdardsproxy2dbsg08928C4C",
+              "GroupId"
+            ]
+          }
+        ]
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete",
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-DBInstance/Resource"
+      }
+    },
+    "lambdardsDBInstanceLambdaRdsExampleStackproxyIAMRoleE947A59C": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "rds.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-DBInstance/LambdaRdsExampleStack-proxy/IAMRole/Resource"
+      }
+    },
+    "lambdardsDBInstanceLambdaRdsExampleStackproxyIAMRoleDefaultPolicy71711129": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "secretsmanager:GetSecretValue",
+                "secretsmanager:DescribeSecret"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Ref": "lambdardsDBCredentialsSecretC599BE51"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "lambdardsDBInstanceLambdaRdsExampleStackproxyIAMRoleDefaultPolicy71711129",
+        "Roles": [
+          {
+            "Ref": "lambdardsDBInstanceLambdaRdsExampleStackproxyIAMRoleE947A59C"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-DBInstance/LambdaRdsExampleStack-proxy/IAMRole/DefaultPolicy/Resource"
+      }
+    },
+    "lambdardsDBInstanceLambdaRdsExampleStackproxy55C1F702": {
+      "Type": "AWS::RDS::DBProxy",
+      "Properties": {
+        "Auth": [
+          {
+            "AuthScheme": "SECRETS",
+            "IAMAuth": "DISABLED",
+            "SecretArn": {
+              "Ref": "lambdardsDBCredentialsSecretC599BE51"
+            }
+          }
+        ],
+        "DBProxyName": "LambdaRdsExampleStack-proxy",
+        "EngineFamily": "MYSQL",
+        "RoleArn": {
+          "Fn::GetAtt": [
+            "lambdardsDBInstanceLambdaRdsExampleStackproxyIAMRoleE947A59C",
+            "Arn"
+          ]
+        },
+        "VpcSubnetIds": [
+          {
+            "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet1Subnet697E5C8E"
+          },
+          {
+            "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet2SubnetD75D6AC4"
+          }
+        ],
+        "DebugLogging": true,
+        "RequireTLS": true,
+        "VpcSecurityGroupIds": [
+          {
+            "Fn::GetAtt": [
+              "lambdardsproxy2dbsg08928C4C",
+              "GroupId"
+            ]
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-DBInstance/LambdaRdsExampleStack-proxy/Resource"
+      }
+    },
+    "lambdardsDBInstanceLambdaRdsExampleStackproxyProxyTargetGroup16334F5A": {
+      "Type": "AWS::RDS::DBProxyTargetGroup",
+      "Properties": {
+        "DBProxyName": {
+          "Ref": "lambdardsDBInstanceLambdaRdsExampleStackproxy55C1F702"
+        },
+        "TargetGroupName": "default",
+        "ConnectionPoolConfigurationInfo": {},
+        "DBInstanceIdentifiers": [
+          {
+            "Ref": "lambdardsDBInstanceE24F7D33"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-DBInstance/LambdaRdsExampleStack-proxy/ProxyTargetGroup"
+      }
+    },
+    "lambdardsbastionhostInstanceRole4B673ACA": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "ec2.",
+                      {
+                        "Ref": "AWS::URLSuffix"
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LambdaRdsExampleStack/lambda-rds-bastion-host"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-bastion-host/InstanceRole/Resource"
+      }
+    },
+    "lambdardsbastionhostInstanceProfileEC3D51F2": {
+      "Type": "AWS::IAM::InstanceProfile",
+      "Properties": {
+        "Roles": [
+          {
+            "Ref": "lambdardsbastionhostInstanceRole4B673ACA"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-bastion-host/InstanceProfile"
+      }
+    },
+    "lambdardsbastionhost66F0DE4B": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
+        },
+        "IamInstanceProfile": {
+          "Ref": "lambdardsbastionhostInstanceProfileEC3D51F2"
+        },
+        "ImageId": {
+          "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+        },
+        "InstanceType": "t2.micro",
+        "KeyName": "pryan-aws",
+        "SecurityGroupIds": [
+          {
+            "Fn::GetAtt": [
+              "bastionsg1FA4DDAF",
+              "GroupId"
+            ]
+          }
+        ],
+        "SubnetId": {
+          "Ref": "lambdardsVpclambdardsPublicsubnetSubnet1Subnet8CCCDC3A"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LambdaRdsExampleStack/lambda-rds-bastion-host"
+          }
+        ],
+        "UserData": {
+          "Fn::Base64": "#!/bin/bash"
+        }
+      },
+      "DependsOn": [
+        "lambdardsbastionhostInstanceRole4B673ACA"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-bastion-host/Resource"
+      }
+    },
+    "lambdardsfunctionServiceRoleD993BA2C": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+              ]
+            ]
+          },
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+              ]
+            ]
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-function/ServiceRole/Resource"
+      }
+    },
+    "lambdardsfunctionC38F4446": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+          },
+          "S3Key": "3861ab7affed6b9f0fd0b54d315423efcd929b61dd7bf6bc85c10463424290f2.zip"
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "lambdardsfunctionServiceRoleD993BA2C",
+            "Arn"
+          ]
+        },
+        "Environment": {
+          "Variables": {
+            "key1": "value1"
+          }
+        },
+        "Handler": "rds_lambda.lambda_handler",
+        "Runtime": "python3.9",
+        "Timeout": 300,
+        "VpcConfig": {
+          "SecurityGroupIds": [
+            {
+              "Fn::GetAtt": [
+                "lambdardsl2proxysg314C9929",
+                "GroupId"
+              ]
+            }
+          ],
+          "SubnetIds": [
+            {
+              "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet1Subnet697E5C8E"
+            },
+            {
+              "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet2SubnetD75D6AC4"
+            }
+          ]
+        }
+      },
+      "DependsOn": [
+        "lambdardsfunctionServiceRoleD993BA2C"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-function/Resource",
+        "aws:asset:path": "/Users/patrickryan/Development/aws/cdk-sandbox/lambda-rds-example/rds_lambda",
+        "aws:asset:is-bundled": true,
+        "aws:asset:property": "Code"
+      }
+    },
+    "lambdardsTestAPILambdaA9255498": {
+      "Type": "AWS::ApiGatewayV2::Api",
+      "Properties": {
+        "Name": "lambda-rds-Test API Lambda",
+        "ProtocolType": "HTTP"
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Test API Lambda/Resource"
+      }
+    },
+    "lambdardsTestAPILambdaDefaultRoutelb1lambdaproxyPermission1E941BC2": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "lambdardsfunctionC38F4446",
+            "Arn"
+          ]
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "lambdardsTestAPILambdaA9255498"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Test API Lambda/DefaultRoute/lb1-lambda-proxy-Permission"
+      }
+    },
+    "lambdardsTestAPILambdaDefaultRoutelb1lambdaproxy5DFB1EFD": {
+      "Type": "AWS::ApiGatewayV2::Integration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "lambdardsTestAPILambdaA9255498"
+        },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": {
+          "Fn::GetAtt": [
+            "lambdardsfunctionC38F4446",
+            "Arn"
+          ]
+        },
+        "PayloadFormatVersion": "2.0"
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Test API Lambda/DefaultRoute/lb1-lambda-proxy/Resource"
+      }
+    },
+    "lambdardsTestAPILambdaDefaultRoute05139912": {
+      "Type": "AWS::ApiGatewayV2::Route",
+      "Properties": {
+        "ApiId": {
+          "Ref": "lambdardsTestAPILambdaA9255498"
+        },
+        "RouteKey": "$default",
+        "AuthorizationType": "NONE",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "lambdardsTestAPILambdaDefaultRoutelb1lambdaproxy5DFB1EFD"
+              }
+            ]
+          ]
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Test API Lambda/DefaultRoute/Resource"
+      }
+    },
+    "lambdardsTestAPILambdaDefaultStage6C0C8D45": {
+      "Type": "AWS::ApiGatewayV2::Stage",
+      "Properties": {
+        "ApiId": {
+          "Ref": "lambdardsTestAPILambdaA9255498"
+        },
+        "StageName": "$default",
+        "AutoDeploy": true
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Test API Lambda/DefaultStage/Resource"
+      }
+    },
+    "CDKMetadata": {
+      "Type": "AWS::CDK::Metadata",
+      "Properties": {
+        "Analytics": "v2:deflate64:H4sIAAAAAAAA/31STU/DMAz9Lbun2djEgRvbELAT1Ya4IjczXVibVIkDTFX/O/no2mlInOznPNvPdub85pa3swl820zsj1klC97uCMSR+dB7i2LO27dGsPWHesvXLHdFJcXOFQopxEZvqx3hKxQVjvExtrRWCwkktRrILDfyCwjHGhtFaLz/5KPfcOqb9mhJXtahRkVsh8IZSacno10T2/0b2KjSoLVsoyyBEphaJb9jFoVBsjUoKNH46SPuiwQvmVcwJdKFiIFw/eJL2jps0UhV5mCgRj9W4A+gY2ZvefsABAVYHISlVQxTPKz+BAbqOTc3+ueU3q7dJCwmd0yC17TV6TzR5tqfMvJH71ze53/IKmxn8Q7W+v3wZTAe85UTR6SV780qqIs98NZnPjolzufN0dTSWo86Bo0s0wG/5pG4bOT51qW5+hFhp+TP0HVsi1Y7k441LjGKCBS/2vDy4qhx6f9d8Nda7SXF9rMMquYAfDa57//4NNg2Kc+aEx206jl5BMMgl8p7RvtM1IQBgk2Sg3c5S8D9DB1LFacLfsdvZpNPK2VmnCJZI98m+wuvbHBZgQMAAA=="
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/CDKMetadata/Default"
+      },
+      "Condition": "CDKMetadataAvailable"
+    }
+  },
+  "Parameters": {
+    "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+      "Default": "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
+    },
+    "BootstrapVersion": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+    }
+  },
+  "Outputs": {
+    "PublicIp": {
+      "Description": "public ip of bastion host",
+      "Value": {
+        "Fn::GetAtt": [
+          "lambdardsbastionhost66F0DE4B",
+          "PublicIp"
+        ]
+      },
+      "Export": {
+        "Name": "ec2-public-ip"
+      }
+    },
+    "HTTPAPIUrl": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "https://",
+            {
+              "Ref": "lambdardsTestAPILambdaA9255498"
+            },
+            ".execute-api.",
+            {
+              "Ref": "AWS::Region"
+            },
+            ".",
+            {
+              "Ref": "AWS::URLSuffix"
+            },
+            "/"
+          ]
+        ]
+      }
+    },
+    "dbEndpoint": {
+      "Description": "db host",
+      "Value": {
+        "Fn::GetAtt": [
+          "lambdardsDBInstanceE24F7D33",
+          "Endpoint.Address"
+        ]
+      }
+    }
+  },
+  "Conditions": {
+    "CDKMetadataAvailable": {
+      "Fn::Or": [
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "af-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-northeast-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-northeast-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-southeast-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-southeast-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ca-central-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "cn-north-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "cn-northwest-1"
+              ]
+            }
+          ]
+        },
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-central-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-north-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-3"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "me-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "sa-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-east-2"
+              ]
+            }
+          ]
+        },
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-west-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-west-2"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5"
+                  ],
+                  {
+                    "Ref": "BootstrapVersion"
+                  }
+                ]
+              }
+            ]
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+        }
+      ]
+    }
+  }
+}

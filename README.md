@@ -1,4 +1,39 @@
 
+# Lambda / RDS CDK Example
+
+
+
+## Reference Material
+
+TODO:
+
+* create requirments.txt
+* add pymysql library
+* write lambda to hit mysql
+  * https://aws.amazon.com/blogs/security/how-to-securely-provide-database-credentials-to-lambda-functions-by-using-aws-secrets-manager/
+* add environment variables to lambda cdk
+* 
+
+
+### The RDS Proxy Example
+
+This project is based on the [cdk-patterns/serverless/the-rds-proxy](https://github.com/cdk-patterns/serverless/tree/main/the-rds-proxy)
+
+### AWS Blogs
+
+https://aws.amazon.com/blogs/infrastructure-and-automation/use-aws-cdk-to-initialize-amazon-rds-instances/
+
+https://aws.amazon.com/blogs/security/how-to-securely-provide-database-credentials-to-lambda-functions-by-using-aws-secrets-manager/
+
+### Lambda / MySql RDS Example Blog
+
+https://levelup.gitconnected.com/aws-lambda-with-rds-using-pymysql-23ad3cde46c8
+
+
+
+
+
+
 # Welcome to your CDK Python project!
 
 This is a blank project for Python development with CDK.

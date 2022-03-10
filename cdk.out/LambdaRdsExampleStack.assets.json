@@ -1,0 +1,32 @@
+{
+  "version": "16.0.0",
+  "files": {
+    "3861ab7affed6b9f0fd0b54d315423efcd929b61dd7bf6bc85c10463424290f2": {
+      "source": {
+        "path": "/Users/patrickryan/Development/aws/cdk-sandbox/lambda-rds-example/rds_lambda",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "3861ab7affed6b9f0fd0b54d315423efcd929b61dd7bf6bc85c10463424290f2.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "8df67326f53eac432933d11f7963a765093e1d46281b8e0e2a00350f82ca6ff2": {
+      "source": {
+        "path": "LambdaRdsExampleStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "8df67326f53eac432933d11f7963a765093e1d46281b8e0e2a00350f82ca6ff2.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

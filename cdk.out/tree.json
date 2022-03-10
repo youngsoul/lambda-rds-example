@@ -1,0 +1,1638 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.0.82"
+        }
+      },
+      "LambdaRdsExampleStack": {
+        "id": "LambdaRdsExampleStack",
+        "path": "LambdaRdsExampleStack",
+        "children": {
+          "lambda-rds-Vpc": {
+            "id": "lambda-rds-Vpc",
+            "path": "LambdaRdsExampleStack/lambda-rds-Vpc",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "LambdaRdsExampleStack/lambda-rds-Vpc/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPC",
+                  "aws:cdk:cloudformation:props": {
+                    "cidrBlock": "10.40.0.0/16",
+                    "enableDnsHostnames": true,
+                    "enableDnsSupport": true,
+                    "instanceTenancy": "default",
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "LambdaRdsExampleStack/lambda-rds-Vpc"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPC",
+                  "version": "2.15.0"
+                }
+              },
+              "lambda-rds-Public-subnetSubnet1": {
+                "id": "lambda-rds-Public-subnetSubnet1",
+                "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "cidrBlock": "10.40.0.0/24",
+                        "vpcId": {
+                          "Ref": "lambdardsVpc2146D468"
+                        },
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            0,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "lambda-rds-Public-subnet"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "lambdardsVpc2146D468"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "lambdardsVpclambdardsPublicsubnetSubnet1RouteTable36AD90C0"
+                        },
+                        "subnetId": {
+                          "Ref": "lambdardsVpclambdardsPublicsubnetSubnet1Subnet8CCCDC3A"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "lambdardsVpclambdardsPublicsubnetSubnet1RouteTable36AD90C0"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "lambdardsVpcIGWEFE62065"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.15.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.15.0"
+                }
+              },
+              "lambda-rds-Public-subnetSubnet2": {
+                "id": "lambda-rds-Public-subnetSubnet2",
+                "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "cidrBlock": "10.40.1.0/24",
+                        "vpcId": {
+                          "Ref": "lambdardsVpc2146D468"
+                        },
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            1,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "lambda-rds-Public-subnet"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "lambdardsVpc2146D468"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "lambdardsVpclambdardsPublicsubnetSubnet2RouteTable29ADC0E5"
+                        },
+                        "subnetId": {
+                          "Ref": "lambdardsVpclambdardsPublicsubnetSubnet2Subnet7D22E939"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "lambdardsVpclambdardsPublicsubnetSubnet2RouteTable29ADC0E5"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "lambdardsVpcIGWEFE62065"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.15.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.15.0"
+                }
+              },
+              "lambda-rds-Isolated-subnetSubnet1": {
+                "id": "lambda-rds-Isolated-subnetSubnet1",
+                "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "cidrBlock": "10.40.2.0/24",
+                        "vpcId": {
+                          "Ref": "lambdardsVpc2146D468"
+                        },
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            0,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "lambda-rds-Isolated-subnet"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Isolated"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "lambdardsVpc2146D468"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet1RouteTable498264AE"
+                        },
+                        "subnetId": {
+                          "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet1Subnet697E5C8E"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.15.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.15.0"
+                }
+              },
+              "lambda-rds-Isolated-subnetSubnet2": {
+                "id": "lambda-rds-Isolated-subnetSubnet2",
+                "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "cidrBlock": "10.40.3.0/24",
+                        "vpcId": {
+                          "Ref": "lambdardsVpc2146D468"
+                        },
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            1,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "lambda-rds-Isolated-subnet"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Isolated"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "lambdardsVpc2146D468"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet2RouteTable4C0B8CFE"
+                        },
+                        "subnetId": {
+                          "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet2SubnetD75D6AC4"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.15.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.15.0"
+                }
+              },
+              "IGW": {
+                "id": "IGW",
+                "path": "LambdaRdsExampleStack/lambda-rds-Vpc/IGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::InternetGateway",
+                  "aws:cdk:cloudformation:props": {
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "LambdaRdsExampleStack/lambda-rds-Vpc"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInternetGateway",
+                  "version": "2.15.0"
+                }
+              },
+              "VPCGW": {
+                "id": "VPCGW",
+                "path": "LambdaRdsExampleStack/lambda-rds-Vpc/VPCGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPCGatewayAttachment",
+                  "aws:cdk:cloudformation:props": {
+                    "vpcId": {
+                      "Ref": "lambdardsVpc2146D468"
+                    },
+                    "internetGatewayId": {
+                      "Ref": "lambdardsVpcIGWEFE62065"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPCGatewayAttachment",
+                  "version": "2.15.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Vpc",
+              "version": "2.15.0"
+            }
+          },
+          "lambda-rds-l2proxy-sg": {
+            "id": "lambda-rds-l2proxy-sg",
+            "path": "LambdaRdsExampleStack/lambda-rds-l2proxy-sg",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "LambdaRdsExampleStack/lambda-rds-l2proxy-sg/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "Lambda to RDS Proxy Connection",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "vpcId": {
+                      "Ref": "lambdardsVpc2146D468"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.15.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.15.0"
+            }
+          },
+          "bastionsg": {
+            "id": "bastionsg",
+            "path": "LambdaRdsExampleStack/bastionsg",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "LambdaRdsExampleStack/bastionsg/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "lambda-rds SG for Bastion",
+                    "groupName": "lambda-rds-cdk-bastion-sg",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "securityGroupIngress": [
+                      {
+                        "cidrIp": "73.209.223.60/32",
+                        "ipProtocol": "tcp",
+                        "fromPort": 22,
+                        "toPort": 22,
+                        "description": "SSH Access"
+                      }
+                    ],
+                    "vpcId": {
+                      "Ref": "lambdardsVpc2146D468"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.15.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.15.0"
+            }
+          },
+          "lambda-rds-proxy2db-sg": {
+            "id": "lambda-rds-proxy2db-sg",
+            "path": "LambdaRdsExampleStack/lambda-rds-proxy2db-sg",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "LambdaRdsExampleStack/lambda-rds-proxy2db-sg/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "Proxy to DB Connection",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "vpcId": {
+                      "Ref": "lambdardsVpc2146D468"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.15.0"
+                }
+              },
+              "from LambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30:3306": {
+                "id": "from LambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30:3306",
+                "path": "LambdaRdsExampleStack/lambda-rds-proxy2db-sg/from LambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30:3306",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "ipProtocol": "tcp",
+                    "description": "allow db connection",
+                    "fromPort": 3306,
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "lambdardsproxy2dbsg08928C4C",
+                        "GroupId"
+                      ]
+                    },
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "lambdardsproxy2dbsg08928C4C",
+                        "GroupId"
+                      ]
+                    },
+                    "toPort": 3306
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.15.0"
+                }
+              },
+              "from LambdaRdsExampleStacklambdardsl2proxysgDD528680:3306": {
+                "id": "from LambdaRdsExampleStacklambdardsl2proxysgDD528680:3306",
+                "path": "LambdaRdsExampleStack/lambda-rds-proxy2db-sg/from LambdaRdsExampleStacklambdardsl2proxysgDD528680:3306",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "ipProtocol": "tcp",
+                    "description": "allow lambda connection",
+                    "fromPort": 3306,
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "lambdardsproxy2dbsg08928C4C",
+                        "GroupId"
+                      ]
+                    },
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "lambdardsl2proxysg314C9929",
+                        "GroupId"
+                      ]
+                    },
+                    "toPort": 3306
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.15.0"
+                }
+              },
+              "from LambdaRdsExampleStackbastionsg99B5FE95:3306": {
+                "id": "from LambdaRdsExampleStackbastionsg99B5FE95:3306",
+                "path": "LambdaRdsExampleStack/lambda-rds-proxy2db-sg/from LambdaRdsExampleStackbastionsg99B5FE95:3306",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "ipProtocol": "tcp",
+                    "description": "allow ec2 connection",
+                    "fromPort": 3306,
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "lambdardsproxy2dbsg08928C4C",
+                        "GroupId"
+                      ]
+                    },
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "bastionsg1FA4DDAF",
+                        "GroupId"
+                      ]
+                    },
+                    "toPort": 3306
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.15.0"
+                }
+              },
+              "from LambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30:{IndirectPort}": {
+                "id": "from LambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30:{IndirectPort}",
+                "path": "LambdaRdsExampleStack/lambda-rds-proxy2db-sg/from LambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30:{IndirectPort}",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "ipProtocol": "tcp",
+                    "description": "Allow connections to the database Instance from the Proxy",
+                    "fromPort": {
+                      "Fn::GetAtt": [
+                        "lambdardsDBInstanceE24F7D33",
+                        "Endpoint.Port"
+                      ]
+                    },
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "lambdardsproxy2dbsg08928C4C",
+                        "GroupId"
+                      ]
+                    },
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "lambdardsproxy2dbsg08928C4C",
+                        "GroupId"
+                      ]
+                    },
+                    "toPort": {
+                      "Fn::GetAtt": [
+                        "lambdardsDBInstanceE24F7D33",
+                        "Endpoint.Port"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.15.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.15.0"
+            }
+          },
+          "lambda-rds-DBCredentialsSecret": {
+            "id": "lambda-rds-DBCredentialsSecret",
+            "path": "LambdaRdsExampleStack/lambda-rds-DBCredentialsSecret",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "LambdaRdsExampleStack/lambda-rds-DBCredentialsSecret/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::SecretsManager::Secret",
+                  "aws:cdk:cloudformation:props": {
+                    "generateSecretString": {
+                      "excludePunctuation": true,
+                      "generateStringKey": "password",
+                      "includeSpace": false,
+                      "secretStringTemplate": "{\"username\": \"retireddev\"}"
+                    },
+                    "name": "LambdaRdsExampleStack-rds-credentials"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_secretsmanager.CfnSecret",
+                  "version": "2.15.0"
+                }
+              },
+              "Attachment": {
+                "id": "Attachment",
+                "path": "LambdaRdsExampleStack/lambda-rds-DBCredentialsSecret/Attachment",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "LambdaRdsExampleStack/lambda-rds-DBCredentialsSecret/Attachment/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::SecretsManager::SecretTargetAttachment",
+                      "aws:cdk:cloudformation:props": {
+                        "secretId": {
+                          "Ref": "lambdardsDBCredentialsSecretC599BE51"
+                        },
+                        "targetId": {
+                          "Ref": "lambdardsDBInstanceE24F7D33"
+                        },
+                        "targetType": "AWS::RDS::DBInstance"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_secretsmanager.CfnSecretTargetAttachment",
+                      "version": "2.15.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_secretsmanager.SecretTargetAttachment",
+                  "version": "2.15.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_secretsmanager.Secret",
+              "version": "2.15.0"
+            }
+          },
+          "DBCredentialsArn": {
+            "id": "DBCredentialsArn",
+            "path": "LambdaRdsExampleStack/DBCredentialsArn",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "LambdaRdsExampleStack/DBCredentialsArn/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
+                  "aws:cdk:cloudformation:props": {
+                    "type": "String",
+                    "value": {
+                      "Ref": "lambdardsDBCredentialsSecretC599BE51"
+                    },
+                    "name": "rds-credentials-arn"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                  "version": "2.15.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
+              "version": "2.15.0"
+            }
+          },
+          "lambda-rds-DBInstance": {
+            "id": "lambda-rds-DBInstance",
+            "path": "LambdaRdsExampleStack/lambda-rds-DBInstance",
+            "children": {
+              "SubnetGroup": {
+                "id": "SubnetGroup",
+                "path": "LambdaRdsExampleStack/lambda-rds-DBInstance/SubnetGroup",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "LambdaRdsExampleStack/lambda-rds-DBInstance/SubnetGroup/Default",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::RDS::DBSubnetGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "dbSubnetGroupDescription": "Subnet group for lambda-rds-DBInstance database",
+                        "subnetIds": [
+                          {
+                            "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet1Subnet697E5C8E"
+                          },
+                          {
+                            "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet2SubnetD75D6AC4"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_rds.CfnDBSubnetGroup",
+                      "version": "2.15.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_rds.SubnetGroup",
+                  "version": "2.15.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "LambdaRdsExampleStack/lambda-rds-DBInstance/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::RDS::DBInstance",
+                  "aws:cdk:cloudformation:props": {
+                    "dbInstanceClass": "db.t2.micro",
+                    "allocatedStorage": "100",
+                    "copyTagsToSnapshot": true,
+                    "dbName": "testdb",
+                    "dbSubnetGroupName": {
+                      "Ref": "lambdardsDBInstanceSubnetGroup6038D7B3"
+                    },
+                    "deletionProtection": false,
+                    "engine": "mysql",
+                    "engineVersion": "8.0.16",
+                    "masterUsername": {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "{{resolve:secretsmanager:",
+                          {
+                            "Ref": "lambdardsDBCredentialsSecretC599BE51"
+                          },
+                          ":SecretString:username::}}"
+                        ]
+                      ]
+                    },
+                    "masterUserPassword": {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "{{resolve:secretsmanager:",
+                          {
+                            "Ref": "lambdardsDBCredentialsSecretC599BE51"
+                          },
+                          ":SecretString:password::}}"
+                        ]
+                      ]
+                    },
+                    "multiAz": false,
+                    "port": "3306",
+                    "publiclyAccessible": false,
+                    "storageType": "gp2",
+                    "vpcSecurityGroups": [
+                      {
+                        "Fn::GetAtt": [
+                          "lambdardsproxy2dbsg08928C4C",
+                          "GroupId"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_rds.CfnDBInstance",
+                  "version": "2.15.0"
+                }
+              },
+              "LambdaRdsExampleStack-proxy": {
+                "id": "LambdaRdsExampleStack-proxy",
+                "path": "LambdaRdsExampleStack/lambda-rds-DBInstance/LambdaRdsExampleStack-proxy",
+                "children": {
+                  "IAMRole": {
+                    "id": "IAMRole",
+                    "path": "LambdaRdsExampleStack/lambda-rds-DBInstance/LambdaRdsExampleStack-proxy/IAMRole",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "LambdaRdsExampleStack/lambda-rds-DBInstance/LambdaRdsExampleStack-proxy/IAMRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "rds.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.15.0"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "LambdaRdsExampleStack/lambda-rds-DBInstance/LambdaRdsExampleStack-proxy/IAMRole/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "LambdaRdsExampleStack/lambda-rds-DBInstance/LambdaRdsExampleStack-proxy/IAMRole/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": [
+                                        "secretsmanager:GetSecretValue",
+                                        "secretsmanager:DescribeSecret"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Ref": "lambdardsDBCredentialsSecretC599BE51"
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "lambdardsDBInstanceLambdaRdsExampleStackproxyIAMRoleDefaultPolicy71711129",
+                                "roles": [
+                                  {
+                                    "Ref": "lambdardsDBInstanceLambdaRdsExampleStackproxyIAMRoleE947A59C"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                              "version": "2.15.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Policy",
+                          "version": "2.15.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "LambdaRdsExampleStack/lambda-rds-DBInstance/LambdaRdsExampleStack-proxy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::RDS::DBProxy",
+                      "aws:cdk:cloudformation:props": {
+                        "auth": [
+                          {
+                            "authScheme": "SECRETS",
+                            "iamAuth": "DISABLED",
+                            "secretArn": {
+                              "Ref": "lambdardsDBCredentialsSecretC599BE51"
+                            }
+                          }
+                        ],
+                        "dbProxyName": "LambdaRdsExampleStack-proxy",
+                        "engineFamily": "MYSQL",
+                        "roleArn": {
+                          "Fn::GetAtt": [
+                            "lambdardsDBInstanceLambdaRdsExampleStackproxyIAMRoleE947A59C",
+                            "Arn"
+                          ]
+                        },
+                        "vpcSubnetIds": [
+                          {
+                            "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet1Subnet697E5C8E"
+                          },
+                          {
+                            "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet2SubnetD75D6AC4"
+                          }
+                        ],
+                        "debugLogging": true,
+                        "requireTls": true,
+                        "vpcSecurityGroupIds": [
+                          {
+                            "Fn::GetAtt": [
+                              "lambdardsproxy2dbsg08928C4C",
+                              "GroupId"
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_rds.CfnDBProxy",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "ProxyTargetGroup": {
+                    "id": "ProxyTargetGroup",
+                    "path": "LambdaRdsExampleStack/lambda-rds-DBInstance/LambdaRdsExampleStack-proxy/ProxyTargetGroup",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::RDS::DBProxyTargetGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "dbProxyName": {
+                          "Ref": "lambdardsDBInstanceLambdaRdsExampleStackproxy55C1F702"
+                        },
+                        "targetGroupName": "default",
+                        "connectionPoolConfigurationInfo": {},
+                        "dbInstanceIdentifiers": [
+                          {
+                            "Ref": "lambdardsDBInstanceE24F7D33"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_rds.CfnDBProxyTargetGroup",
+                      "version": "2.15.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_rds.DatabaseProxy",
+                  "version": "2.15.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_rds.DatabaseInstance",
+              "version": "2.15.0"
+            }
+          },
+          "lambda-rds-bastion-host": {
+            "id": "lambda-rds-bastion-host",
+            "path": "LambdaRdsExampleStack/lambda-rds-bastion-host",
+            "children": {
+              "InstanceRole": {
+                "id": "InstanceRole",
+                "path": "LambdaRdsExampleStack/lambda-rds-bastion-host/InstanceRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "LambdaRdsExampleStack/lambda-rds-bastion-host/InstanceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "ec2.",
+                                      {
+                                        "Ref": "AWS::URLSuffix"
+                                      }
+                                    ]
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LambdaRdsExampleStack/lambda-rds-bastion-host"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.15.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.15.0"
+                }
+              },
+              "InstanceProfile": {
+                "id": "InstanceProfile",
+                "path": "LambdaRdsExampleStack/lambda-rds-bastion-host/InstanceProfile",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::InstanceProfile",
+                  "aws:cdk:cloudformation:props": {
+                    "roles": [
+                      {
+                        "Ref": "lambdardsbastionhostInstanceRole4B673ACA"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnInstanceProfile",
+                  "version": "2.15.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "LambdaRdsExampleStack/lambda-rds-bastion-host/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
+                  "aws:cdk:cloudformation:props": {
+                    "availabilityZone": {
+                      "Fn::Select": [
+                        0,
+                        {
+                          "Fn::GetAZs": ""
+                        }
+                      ]
+                    },
+                    "iamInstanceProfile": {
+                      "Ref": "lambdardsbastionhostInstanceProfileEC3D51F2"
+                    },
+                    "imageId": {
+                      "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+                    },
+                    "instanceType": "t2.micro",
+                    "keyName": "pryan-aws",
+                    "securityGroupIds": [
+                      {
+                        "Fn::GetAtt": [
+                          "bastionsg1FA4DDAF",
+                          "GroupId"
+                        ]
+                      }
+                    ],
+                    "subnetId": {
+                      "Ref": "lambdardsVpclambdardsPublicsubnetSubnet1Subnet8CCCDC3A"
+                    },
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "LambdaRdsExampleStack/lambda-rds-bastion-host"
+                      }
+                    ],
+                    "userData": {
+                      "Fn::Base64": "#!/bin/bash"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInstance",
+                  "version": "2.15.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Instance",
+              "version": "2.15.0"
+            }
+          },
+          "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": {
+            "id": "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter",
+            "path": "LambdaRdsExampleStack/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.15.0"
+            }
+          },
+          "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118": {
+            "id": "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118",
+            "path": "LambdaRdsExampleStack/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Resource",
+              "version": "2.15.0"
+            }
+          },
+          "lambda-rds-function": {
+            "id": "lambda-rds-function",
+            "path": "LambdaRdsExampleStack/lambda-rds-function",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "LambdaRdsExampleStack/lambda-rds-function/ServiceRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "LambdaRdsExampleStack/lambda-rds-function/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          },
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.15.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.15.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "LambdaRdsExampleStack/lambda-rds-function/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "LambdaRdsExampleStack/lambda-rds-function/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "LambdaRdsExampleStack/lambda-rds-function/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.15.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.15.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "LambdaRdsExampleStack/lambda-rds-function/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                      },
+                      "s3Key": "3861ab7affed6b9f0fd0b54d315423efcd929b61dd7bf6bc85c10463424290f2.zip"
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "lambdardsfunctionServiceRoleD993BA2C",
+                        "Arn"
+                      ]
+                    },
+                    "environment": {
+                      "variables": {
+                        "key1": "value1"
+                      }
+                    },
+                    "handler": "rds_lambda.lambda_handler",
+                    "runtime": "python3.9",
+                    "timeout": 300,
+                    "vpcConfig": {
+                      "subnetIds": [
+                        {
+                          "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet1Subnet697E5C8E"
+                        },
+                        {
+                          "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet2SubnetD75D6AC4"
+                        }
+                      ],
+                      "securityGroupIds": [
+                        {
+                          "Fn::GetAtt": [
+                            "lambdardsl2proxysg314C9929",
+                            "GroupId"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.15.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-lambda-python-alpha.PythonFunction",
+              "version": "2.15.0-alpha.0"
+            }
+          },
+          "lambda-rds-Test API Lambda": {
+            "id": "lambda-rds-Test API Lambda",
+            "path": "LambdaRdsExampleStack/lambda-rds-Test API Lambda",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "LambdaRdsExampleStack/lambda-rds-Test API Lambda/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Api",
+                  "aws:cdk:cloudformation:props": {
+                    "name": "lambda-rds-Test API Lambda",
+                    "protocolType": "HTTP"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnApi",
+                  "version": "2.15.0"
+                }
+              },
+              "DefaultRoute": {
+                "id": "DefaultRoute",
+                "path": "LambdaRdsExampleStack/lambda-rds-Test API Lambda/DefaultRoute",
+                "children": {
+                  "lb1-lambda-proxy-Permission": {
+                    "id": "lb1-lambda-proxy-Permission",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Test API Lambda/DefaultRoute/lb1-lambda-proxy-Permission",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                      "aws:cdk:cloudformation:props": {
+                        "action": "lambda:InvokeFunction",
+                        "functionName": {
+                          "Fn::GetAtt": [
+                            "lambdardsfunctionC38F4446",
+                            "Arn"
+                          ]
+                        },
+                        "principal": "apigateway.amazonaws.com",
+                        "sourceArn": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "arn:",
+                              {
+                                "Ref": "AWS::Partition"
+                              },
+                              ":execute-api:",
+                              {
+                                "Ref": "AWS::Region"
+                              },
+                              ":",
+                              {
+                                "Ref": "AWS::AccountId"
+                              },
+                              ":",
+                              {
+                                "Ref": "lambdardsTestAPILambdaA9255498"
+                              },
+                              "/*/*"
+                            ]
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "lb1-lambda-proxy": {
+                    "id": "lb1-lambda-proxy",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Test API Lambda/DefaultRoute/lb1-lambda-proxy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "LambdaRdsExampleStack/lambda-rds-Test API Lambda/DefaultRoute/lb1-lambda-proxy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Integration",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Ref": "lambdardsTestAPILambdaA9255498"
+                            },
+                            "integrationType": "AWS_PROXY",
+                            "integrationUri": {
+                              "Fn::GetAtt": [
+                                "lambdardsfunctionC38F4446",
+                                "Arn"
+                              ]
+                            },
+                            "payloadFormatVersion": "2.0"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnIntegration",
+                          "version": "2.15.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpIntegration",
+                      "version": "2.15.0-alpha.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Test API Lambda/DefaultRoute/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "apiId": {
+                          "Ref": "lambdardsTestAPILambdaA9255498"
+                        },
+                        "routeKey": "$default",
+                        "authorizationType": "NONE",
+                        "target": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "integrations/",
+                              {
+                                "Ref": "lambdardsTestAPILambdaDefaultRoutelb1lambdaproxy5DFB1EFD"
+                              }
+                            ]
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnRoute",
+                      "version": "2.15.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpRoute",
+                  "version": "2.15.0-alpha.0"
+                }
+              },
+              "DefaultStage": {
+                "id": "DefaultStage",
+                "path": "LambdaRdsExampleStack/lambda-rds-Test API Lambda/DefaultStage",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "LambdaRdsExampleStack/lambda-rds-Test API Lambda/DefaultStage/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Stage",
+                      "aws:cdk:cloudformation:props": {
+                        "apiId": {
+                          "Ref": "lambdardsTestAPILambdaA9255498"
+                        },
+                        "stageName": "$default",
+                        "autoDeploy": true
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnStage",
+                      "version": "2.15.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpStage",
+                  "version": "2.15.0-alpha.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpApi",
+              "version": "2.15.0-alpha.0"
+            }
+          },
+          "PublicIp": {
+            "id": "PublicIp",
+            "path": "LambdaRdsExampleStack/PublicIp",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.15.0"
+            }
+          },
+          "HTTP API Url": {
+            "id": "HTTP API Url",
+            "path": "LambdaRdsExampleStack/HTTP API Url",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.15.0"
+            }
+          },
+          "dbEndpoint": {
+            "id": "dbEndpoint",
+            "path": "LambdaRdsExampleStack/dbEndpoint",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.15.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "LambdaRdsExampleStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "LambdaRdsExampleStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.15.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "LambdaRdsExampleStack/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.15.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.0.82"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.15.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.15.0"
+    }
+  }
+}
