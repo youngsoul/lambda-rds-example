@@ -102,6 +102,44 @@
         "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1/DefaultRoute"
       }
     },
+    "lambdardsVpclambdardsPublicsubnetSubnet1EIPED5F53E4": {
+      "Type": "AWS::EC2::EIP",
+      "Properties": {
+        "Domain": "vpc",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1/EIP"
+      }
+    },
+    "lambdardsVpclambdardsPublicsubnetSubnet1NATGatewayA1F24812": {
+      "Type": "AWS::EC2::NatGateway",
+      "Properties": {
+        "SubnetId": {
+          "Ref": "lambdardsVpclambdardsPublicsubnetSubnet1Subnet8CCCDC3A"
+        },
+        "AllocationId": {
+          "Fn::GetAtt": [
+            "lambdardsVpclambdardsPublicsubnetSubnet1EIPED5F53E4",
+            "AllocationId"
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1/NATGateway"
+      }
+    },
     "lambdardsVpclambdardsPublicsubnetSubnet2Subnet7D22E939": {
       "Type": "AWS::EC2::Subnet",
       "Properties": {
@@ -186,10 +224,172 @@
         "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet2/DefaultRoute"
       }
     },
-    "lambdardsVpclambdardsIsolatedsubnetSubnet1Subnet697E5C8E": {
+    "lambdardsVpclambdardsPrivatesubnetSubnet1SubnetBB95582D": {
       "Type": "AWS::EC2::Subnet",
       "Properties": {
         "CidrBlock": "10.40.2.0/24",
+        "VpcId": {
+          "Ref": "lambdardsVpc2146D468"
+        },
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
+        },
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "lambda-rds-Private-subnet"
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private"
+          },
+          {
+            "Key": "Name",
+            "Value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Private-subnetSubnet1"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Private-subnetSubnet1/Subnet"
+      }
+    },
+    "lambdardsVpclambdardsPrivatesubnetSubnet1RouteTable429A3504": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "lambdardsVpc2146D468"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Private-subnetSubnet1"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Private-subnetSubnet1/RouteTable"
+      }
+    },
+    "lambdardsVpclambdardsPrivatesubnetSubnet1RouteTableAssociation8C6A3D5F": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "lambdardsVpclambdardsPrivatesubnetSubnet1RouteTable429A3504"
+        },
+        "SubnetId": {
+          "Ref": "lambdardsVpclambdardsPrivatesubnetSubnet1SubnetBB95582D"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Private-subnetSubnet1/RouteTableAssociation"
+      }
+    },
+    "lambdardsVpclambdardsPrivatesubnetSubnet1DefaultRoute2701258C": {
+      "Type": "AWS::EC2::Route",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "lambdardsVpclambdardsPrivatesubnetSubnet1RouteTable429A3504"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": {
+          "Ref": "lambdardsVpclambdardsPublicsubnetSubnet1NATGatewayA1F24812"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Private-subnetSubnet1/DefaultRoute"
+      }
+    },
+    "lambdardsVpclambdardsPrivatesubnetSubnet2Subnet302AAC50": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "CidrBlock": "10.40.3.0/24",
+        "VpcId": {
+          "Ref": "lambdardsVpc2146D468"
+        },
+        "AvailabilityZone": {
+          "Fn::Select": [
+            1,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
+        },
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "lambda-rds-Private-subnet"
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private"
+          },
+          {
+            "Key": "Name",
+            "Value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Private-subnetSubnet2"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Private-subnetSubnet2/Subnet"
+      }
+    },
+    "lambdardsVpclambdardsPrivatesubnetSubnet2RouteTable5EACC183": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "lambdardsVpc2146D468"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Private-subnetSubnet2"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Private-subnetSubnet2/RouteTable"
+      }
+    },
+    "lambdardsVpclambdardsPrivatesubnetSubnet2RouteTableAssociation746D91C6": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "lambdardsVpclambdardsPrivatesubnetSubnet2RouteTable5EACC183"
+        },
+        "SubnetId": {
+          "Ref": "lambdardsVpclambdardsPrivatesubnetSubnet2Subnet302AAC50"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Private-subnetSubnet2/RouteTableAssociation"
+      }
+    },
+    "lambdardsVpclambdardsPrivatesubnetSubnet2DefaultRoute29F1DF0C": {
+      "Type": "AWS::EC2::Route",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "lambdardsVpclambdardsPrivatesubnetSubnet2RouteTable5EACC183"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": {
+          "Ref": "lambdardsVpclambdardsPublicsubnetSubnet1NATGatewayA1F24812"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Private-subnetSubnet2/DefaultRoute"
+      }
+    },
+    "lambdardsVpclambdardsIsolatedsubnetSubnet1Subnet697E5C8E": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "CidrBlock": "10.40.4.0/24",
         "VpcId": {
           "Ref": "lambdardsVpc2146D468"
         },
@@ -255,7 +455,7 @@
     "lambdardsVpclambdardsIsolatedsubnetSubnet2SubnetD75D6AC4": {
       "Type": "AWS::EC2::Subnet",
       "Properties": {
-        "CidrBlock": "10.40.3.0/24",
+        "CidrBlock": "10.40.5.0/24",
         "VpcId": {
           "Ref": "lambdardsVpc2146D468"
         },
@@ -551,19 +751,6 @@
         "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-DBCredentialsSecret/Attachment/Resource"
       }
     },
-    "DBCredentialsArn15122902": {
-      "Type": "AWS::SSM::Parameter",
-      "Properties": {
-        "Type": "String",
-        "Value": {
-          "Ref": "lambdardsDBCredentialsSecretC599BE51"
-        },
-        "Name": "rds-credentials-arn"
-      },
-      "Metadata": {
-        "aws:cdk:path": "LambdaRdsExampleStack/DBCredentialsArn/Resource"
-      }
-    },
     "lambdardsDBInstanceSubnetGroup6038D7B3": {
       "Type": "AWS::RDS::DBSubnetGroup",
       "Properties": {
@@ -708,14 +895,14 @@
         },
         "VpcSubnetIds": [
           {
-            "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet1Subnet697E5C8E"
+            "Ref": "lambdardsVpclambdardsPrivatesubnetSubnet1SubnetBB95582D"
           },
           {
-            "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet2SubnetD75D6AC4"
+            "Ref": "lambdardsVpclambdardsPrivatesubnetSubnet2Subnet302AAC50"
           }
         ],
         "DebugLogging": true,
-        "RequireTLS": true,
+        "RequireTLS": false,
         "VpcSecurityGroupIds": [
           {
             "Fn::GetAtt": [
@@ -889,6 +1076,35 @@
         "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-function/ServiceRole/Resource"
       }
     },
+    "lambdardsfunctionServiceRoleDefaultPolicy7AC394CF": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "secretsmanager:GetSecretValue",
+                "secretsmanager:DescribeSecret"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Ref": "lambdardsDBCredentialsSecretC599BE51"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "lambdardsfunctionServiceRoleDefaultPolicy7AC394CF",
+        "Roles": [
+          {
+            "Ref": "lambdardsfunctionServiceRoleD993BA2C"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-function/ServiceRole/DefaultPolicy/Resource"
+      }
+    },
     "lambdardsfunctionC38F4446": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
@@ -896,7 +1112,7 @@
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
           },
-          "S3Key": "3861ab7affed6b9f0fd0b54d315423efcd929b61dd7bf6bc85c10463424290f2.zip"
+          "S3Key": "d717a4bac1d5a898538a596c17e4fbe0dbcaaa0e62c25cacc9031c78fa13553d.zip"
         },
         "Role": {
           "Fn::GetAtt": [
@@ -906,12 +1122,19 @@
         },
         "Environment": {
           "Variables": {
-            "key1": "value1"
+            "RDS_HOST": {
+              "Fn::GetAtt": [
+                "lambdardsDBInstanceLambdaRdsExampleStackproxy55C1F702",
+                "Endpoint"
+              ]
+            },
+            "RDS_DB_NAME": "testdb",
+            "SECRET_NAME": "LambdaRdsExampleStack-rds-credentials"
           }
         },
         "Handler": "rds_lambda.lambda_handler",
         "Runtime": "python3.9",
-        "Timeout": 300,
+        "Timeout": 30,
         "VpcConfig": {
           "SecurityGroupIds": [
             {
@@ -923,20 +1146,21 @@
           ],
           "SubnetIds": [
             {
-              "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet1Subnet697E5C8E"
+              "Ref": "lambdardsVpclambdardsPrivatesubnetSubnet1SubnetBB95582D"
             },
             {
-              "Ref": "lambdardsVpclambdardsIsolatedsubnetSubnet2SubnetD75D6AC4"
+              "Ref": "lambdardsVpclambdardsPrivatesubnetSubnet2Subnet302AAC50"
             }
           ]
         }
       },
       "DependsOn": [
+        "lambdardsfunctionServiceRoleDefaultPolicy7AC394CF",
         "lambdardsfunctionServiceRoleD993BA2C"
       ],
       "Metadata": {
         "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-function/Resource",
-        "aws:asset:path": "/Users/patrickryan/Development/aws/cdk-sandbox/lambda-rds-example/rds_lambda",
+        "aws:asset:path": "asset.d717a4bac1d5a898538a596c17e4fbe0dbcaaa0e62c25cacc9031c78fa13553d",
         "aws:asset:is-bundled": true,
         "aws:asset:property": "Code"
       }
@@ -1050,7 +1274,7 @@
     "CDKMetadata": {
       "Type": "AWS::CDK::Metadata",
       "Properties": {
-        "Analytics": "v2:deflate64:H4sIAAAAAAAA/31STU/DMAz9Lbun2djEgRvbELAT1Ya4IjczXVibVIkDTFX/O/no2mlInOznPNvPdub85pa3swl820zsj1klC97uCMSR+dB7i2LO27dGsPWHesvXLHdFJcXOFQopxEZvqx3hKxQVjvExtrRWCwkktRrILDfyCwjHGhtFaLz/5KPfcOqb9mhJXtahRkVsh8IZSacno10T2/0b2KjSoLVsoyyBEphaJb9jFoVBsjUoKNH46SPuiwQvmVcwJdKFiIFw/eJL2jps0UhV5mCgRj9W4A+gY2ZvefsABAVYHISlVQxTPKz+BAbqOTc3+ueU3q7dJCwmd0yC17TV6TzR5tqfMvJH71ze53/IKmxn8Q7W+v3wZTAe85UTR6SV780qqIs98NZnPjolzufN0dTSWo86Bo0s0wG/5pG4bOT51qW5+hFhp+TP0HVsi1Y7k441LjGKCBS/2vDy4qhx6f9d8Nda7SXF9rMMquYAfDa57//4NNg2Kc+aEx206jl5BMMgl8p7RvtM1IQBgk2Sg3c5S8D9DB1LFacLfsdvZpNPK2VmnCJZI98m+wuvbHBZgQMAAA=="
+        "Analytics": "v2:deflate64:H4sIAAAAAAAA/31STW/bMAz9LbnLapqih92WpFuby2YkRa8FrbCOFlsyJKpdIPi/Tx/+CFpgJz5Sj+SjyBW/ved+uYAPW4jjuWhkxf2BQJxZCL16FCvuXzrBtm/qpdyy0lWNFAdXKaQYm9FeO8JnqBqc43Nsba0WEkhqNZEj+LEro/kF9AiEH3BhpZHvAc6Fd4rQBDwSspLBW1PQempRETugcEbS5dFo1yUN/w3sVG3QWrZTlkAJzK0y7plFYZBsCwpqNOFLkj8UiSibZzA10pWIifD5pWfmaLl/AIIKLE5d85yTxIfNl8BEHXNLo/9e8ttnmLum5J5JaLnf67yQZEsdlpf4MxrLh/w32cTR717B2jA8X0cTfL5x4oy0Cb1ZA211BO5D5k+nxLjQEk0rrQ1ez6CTdd7O+yoR150cF1mbrzcQzq3Gvmd7tNqZvIkSDLQYFs+SiEiRqo4vvx11Ll/cFX+r1VFSar8soOlOwJeL78NV30Trs/Kiu9BJq4FTJmca5Fr5wPBPRF0cINosOaLrWaI/zNCzXPHmjn/jt8vFHytlYZwi2SLfZ/sPsCVrKnMDAAA="
       },
       "Metadata": {
         "aws:cdk:path": "LambdaRdsExampleStack/CDKMetadata/Default"
@@ -1110,6 +1334,14 @@
         "Fn::GetAtt": [
           "lambdardsDBInstanceE24F7D33",
           "Endpoint.Address"
+        ]
+      }
+    },
+    "proxyDbEndpoint": {
+      "Value": {
+        "Fn::GetAtt": [
+          "lambdardsDBInstanceLambdaRdsExampleStackproxy55C1F702",
+          "Endpoint"
         ]
       }
     }

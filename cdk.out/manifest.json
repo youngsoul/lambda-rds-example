@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/8df67326f53eac432933d11f7963a765093e1d46281b8e0e2a00350f82ca6ff2.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/85a6197a2ff29b2165905acd89b1db8eac63f23b3495e52866eb2a9653928c33.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -69,6 +69,18 @@
             "data": "lambdardsVpclambdardsPublicsubnetSubnet1DefaultRoute2EFC7319"
           }
         ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsPublicsubnetSubnet1EIPED5F53E4"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsPublicsubnetSubnet1NATGatewayA1F24812"
+          }
+        ],
         "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Public-subnetSubnet2/Subnet": [
           {
             "type": "aws:cdk:logicalId",
@@ -91,6 +103,54 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "lambdardsVpclambdardsPublicsubnetSubnet2DefaultRoute4A30080A"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Private-subnetSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsPrivatesubnetSubnet1SubnetBB95582D"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Private-subnetSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsPrivatesubnetSubnet1RouteTable429A3504"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Private-subnetSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsPrivatesubnetSubnet1RouteTableAssociation8C6A3D5F"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Private-subnetSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsPrivatesubnetSubnet1DefaultRoute2701258C"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Private-subnetSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsPrivatesubnetSubnet2Subnet302AAC50"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Private-subnetSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsPrivatesubnetSubnet2RouteTable5EACC183"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Private-subnetSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsPrivatesubnetSubnet2RouteTableAssociation746D91C6"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Private-subnetSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsVpclambdardsPrivatesubnetSubnet2DefaultRoute29F1DF0C"
           }
         ],
         "/LambdaRdsExampleStack/lambda-rds-Vpc/lambda-rds-Isolated-subnetSubnet1/Subnet": [
@@ -195,12 +255,6 @@
             "data": "lambdardsDBCredentialsSecretAttachment0482F28D"
           }
         ],
-        "/LambdaRdsExampleStack/DBCredentialsArn/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DBCredentialsArn15122902"
-          }
-        ],
         "/LambdaRdsExampleStack/lambda-rds-DBInstance/SubnetGroup/Default": [
           {
             "type": "aws:cdk:logicalId",
@@ -267,6 +321,12 @@
             "data": "lambdardsfunctionServiceRoleD993BA2C"
           }
         ],
+        "/LambdaRdsExampleStack/lambda-rds-function/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsfunctionServiceRoleDefaultPolicy7AC394CF"
+          }
+        ],
         "/LambdaRdsExampleStack/lambda-rds-function/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -319,6 +379,12 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "dbEndpoint"
+          }
+        ],
+        "/LambdaRdsExampleStack/proxyDbEndpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "proxyDbEndpoint"
           }
         ],
         "/LambdaRdsExampleStack/CDKMetadata/Default": [

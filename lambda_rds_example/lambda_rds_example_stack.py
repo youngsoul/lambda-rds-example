@@ -46,7 +46,7 @@ class LambdaRdsExampleStack(Stack):
         #   with just a public.
         vpc = ec2.Vpc(self, f'{resource_prefix}-Vpc',
                       cidr='10.40.0.0/16',
-                      nat_gateways=0,
+                      nat_gateways=1,
                       max_azs=2,
                       enable_dns_hostnames=True,
                       enable_dns_support=True,
@@ -56,11 +56,11 @@ class LambdaRdsExampleStack(Stack):
                               subnet_type=ec2.SubnetType.PUBLIC,
                               cidr_mask=24
                           ),
-                          # ec2.SubnetConfiguration(
-                          #     name="Private",
-                          #     subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT,
-                          #     cidr_mask=24
-                          # ),
+                          ec2.SubnetConfiguration(
+                              name=f"{resource_prefix}-Private-subnet",
+                              subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT,
+                              cidr_mask=24
+                          ),
                           ec2.SubnetConfiguration(
                               name=f"{resource_prefix}-Isolated-subnet",
                               subnet_type=ec2.SubnetType.PRIVATE_ISOLATED,
@@ -120,9 +120,9 @@ class LambdaRdsExampleStack(Stack):
                                                    generate_string_key="password"
                                                ))
 
-        ssm.StringParameter(self, 'DBCredentialsArn',
-                            parameter_name='rds-credentials-arn',
-                            string_value=db_credentials_secret.secret_arn)
+        # ssm.StringParameter(self, 'DBCredentialsArn',
+        #                     parameter_name='rds-credentials-arn',
+        #                     string_value=db_credentials_secret.secret_arn)
 
         # -------------------------------------------------------------------
         #           RDS
@@ -195,6 +195,7 @@ class LambdaRdsExampleStack(Stack):
                                        secrets=[db_credentials_secret],
                                        debug_logging=True,
                                        vpc=vpc,
+                                       require_tls=False,
                                        security_groups=[db_connection_sg])
 
         # Workaround for bug where TargetGroupName is not set but required
@@ -235,30 +236,32 @@ class LambdaRdsExampleStack(Stack):
                                            vpc=vpc,
                                            vpc_subnets=ec2.SubnetSelection(
                                                # this will create the ec2 instance in one of the PUBLIC subnets of the VPC that we just defined above
-                                               subnet_type=ec2.SubnetType.PRIVATE_ISOLATED
+                                               subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT
                                            ),
                                            security_groups=[
                                                lambda_to_proxy_sg
                                            ],
-                                           timeout=Duration.seconds(300),
+                                           timeout=Duration.seconds(30),
                                            environment={
                                                "RDS_HOST": proxy.endpoint,
                                                "RDS_DB_NAME": db_name,
                                                "SECRET_NAME": construct_id + '-rds-credentials',
-                                               "RDS_USERNAME": db_username
 
                                            }
 
         )
 
+        # give the lambda read access to the secrets manager
+        db_credentials_secret.grant_read(lb1)
+
         # defines an API Gateway Http API resource backed by our "efs_lambda" function.
+        # -------------------------------------------------------------------
+        #           Http Api
+        # -------------------------------------------------------------------
         api = api_gw.HttpApi(self, f'{resource_prefix}-Test API Lambda',
                              default_integration=integrations.HttpLambdaIntegration(id="lb1-lambda-proxy",
                                                                                     handler=lb1))
 
-
-        # CfnOutput(self, 'HTTP API Url', value=api.url)
-        # CfnOutput(self, 'FileSystem ID', value=fs.file_system_id)
 
         CfnOutput(
             scope=self,
@@ -266,6 +269,7 @@ class LambdaRdsExampleStack(Stack):
             value= bastion_host.instance_public_ip,
             description="public ip of bastion host",
             export_name="ec2-public-ip")
+
         CfnOutput(self, 'HTTP API Url', value=api.url)
 
         CfnOutput(

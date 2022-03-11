@@ -1,18 +1,25 @@
 
 # Lambda / RDS CDK Example
 
+![LRDS](./docs/LambdaRDSNetwork.drawio.png)
 
+This repo contains a project that outlines the steps to create a network architecture that allows a Lambda to communicate with an RDS MySQL database.
 
-## Reference Material
+Having a Lambda communicate with an RDS database requires that the Lambda be associated with a VPC.  This single requirement creates a heap of complexity.
 
-TODO:
+It should be noted, if your application can use the RDS DataApi, then you do NOT have to put the Lambda into a VPC.  This is something to seriously consider.  However this project specifically looked at how to setup the network architecture to directly communicate with an RDS database.  It also will setup a Bastion box to tunnel a database connection to the Isolated database.
 
-* create requirments.txt
-* add pymysql library
-* write lambda to hit mysql
-  * https://aws.amazon.com/blogs/security/how-to-securely-provide-database-credentials-to-lambda-functions-by-using-aws-secrets-manager/
-* add environment variables to lambda cdk
+## Things to keep in mind
+
+* You must put the Lambda in a VPC should you want to direct connect to an RDS database
+* You should consider using RDS Proxy to manage the connection pool in front of the RDS database
+* The RDS database should go into an Isolated Subnet, which means no traffic and no traffic out unless specifically granted
+* The Lambda should go into Private Subnet, with NAT gateway access so it can get to outside services.  Your other option is to create a VPC endpoint to the SecretsManager.
+* The EC2 Bastion box should be in the Public Subnet. It will be used to tunnel traffic to the RDS database.
+* A number IAM permissions needed to be created
+* Your account, or the profile you are running the CDK with, must have the `AWSServiceRoleForRDS` IAM role
 * 
+
 
 
 ### The RDS Proxy Example
@@ -25,69 +32,14 @@ https://aws.amazon.com/blogs/infrastructure-and-automation/use-aws-cdk-to-initia
 
 https://aws.amazon.com/blogs/security/how-to-securely-provide-database-credentials-to-lambda-functions-by-using-aws-secrets-manager/
 
+https://aws.amazon.com/blogs/security/how-to-securely-provide-database-credentials-to-lambda-functions-by-using-aws-secrets-manager/
+
 ### Lambda / MySql RDS Example Blog
 
 https://levelup.gitconnected.com/aws-lambda-with-rds-using-pymysql-23ad3cde46c8
 
+### YouTube Videos
 
+[AWS RDS MySQL Database Setup](https://www.youtube.com/watch?v=Ng_zi11N4_c&t=0s)
 
-
-
-
-# Welcome to your CDK Python project!
-
-This is a blank project for Python development with CDK.
-
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
-
-This project is set up like a standard Python project.  The initialization
-process also creates a virtualenv within this project, stored under the `.venv`
-directory.  To create the virtualenv it assumes that there is a `python3`
-(or `python` for Windows) executable in your path with access to the `venv`
-package. If for any reason the automatic creation of the virtualenv fails,
-you can create the virtualenv manually.
-
-To manually create a virtualenv on MacOS and Linux:
-
-```
-$ python3 -m venv .venv
-```
-
-After the init process completes and the virtualenv is created, you can use the following
-step to activate your virtualenv.
-
-```
-$ source .venv/bin/activate
-```
-
-If you are a Windows platform, you would activate the virtualenv like this:
-
-```
-% .venv\Scripts\activate.bat
-```
-
-Once the virtualenv is activated, you can install the required dependencies.
-
-```
-$ pip install -r requirements.txt
-```
-
-At this point you can now synthesize the CloudFormation template for this code.
-
-```
-$ cdk synth
-```
-
-To add additional dependencies, for example other CDK libraries, just add
-them to your `setup.py` file and rerun the `pip install -r requirements.txt`
-command.
-
-## Useful commands
-
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
-
-Enjoy!
+[How to Query RDS MySQL From AWS Lambda in Python | Step by Step Tutorial](https://www.youtube.com/watch?v=vyLvmPkQZkI)
