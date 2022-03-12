@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/85a6197a2ff29b2165905acd89b1db8eac63f23b3495e52866eb2a9653928c33.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/61e4cc760a038238c2d317475cf7bfb19ecee86e99c7899508db27483049d756.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -241,6 +241,12 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "lambdardsproxy2dbsgfromLambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30IndirectPortDD0FEF05"
+          }
+        ],
+        "/LambdaRdsExampleStack/lambda-rds-proxy2db-sg/to LambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30:{IndirectPort}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdardsproxy2dbsgtoLambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30IndirectPort69955AEC"
           }
         ],
         "/LambdaRdsExampleStack/lambda-rds-DBCredentialsSecret/Resource": [

@@ -898,13 +898,6 @@
                   "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
                   "aws:cdk:cloudformation:props": {
                     "groupDescription": "Proxy to DB Connection",
-                    "securityGroupEgress": [
-                      {
-                        "cidrIp": "0.0.0.0/0",
-                        "description": "Allow all outbound traffic by default",
-                        "ipProtocol": "-1"
-                      }
-                    ],
                     "vpcId": {
                       "Ref": "lambdardsVpc2146D468"
                     }
@@ -1038,6 +1031,45 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.15.0"
+                }
+              },
+              "to LambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30:{IndirectPort}": {
+                "id": "to LambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30:{IndirectPort}",
+                "path": "LambdaRdsExampleStack/lambda-rds-proxy2db-sg/to LambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30:{IndirectPort}",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupEgress",
+                  "aws:cdk:cloudformation:props": {
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "lambdardsproxy2dbsg08928C4C",
+                        "GroupId"
+                      ]
+                    },
+                    "ipProtocol": "tcp",
+                    "description": "Allow connections to the database Instance from the Proxy",
+                    "destinationSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "lambdardsproxy2dbsg08928C4C",
+                        "GroupId"
+                      ]
+                    },
+                    "fromPort": {
+                      "Fn::GetAtt": [
+                        "lambdardsDBInstanceE24F7D33",
+                        "Endpoint.Port"
+                      ]
+                    },
+                    "toPort": {
+                      "Fn::GetAtt": [
+                        "lambdardsDBInstanceE24F7D33",
+                        "Endpoint.Port"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupEgress",
                   "version": "2.15.0"
                 }
               }
@@ -1657,7 +1689,7 @@
                       "s3Bucket": {
                         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                       },
-                      "s3Key": "d717a4bac1d5a898538a596c17e4fbe0dbcaaa0e62c25cacc9031c78fa13553d.zip"
+                      "s3Key": "52a23409cd56cf3b6ebb6f34aa7532f816dd81ffa55ba615da6905c90f4b356a.zip"
                     },
                     "role": {
                       "Fn::GetAtt": [

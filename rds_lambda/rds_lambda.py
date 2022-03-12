@@ -13,18 +13,22 @@ _session = None
 
 _db_conn = None
 
+_region_name = "us-east-1"
+
 """
 create table if not exists Tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL
-)
+);
 
-insert into Tasks (title)  values("task 1")
-insert into Tasks (title) values("task 2")
+insert into Tasks (title)  values("task 1");
+insert into Tasks (title) values("task 2");
+
+select * from Tasks;
 
 """
 
-def _init(profile_name=None, region='us-east-1'):
+def _init(profile_name=None, region=_region_name):
     global _session
 
     if _session is None:
@@ -49,7 +53,7 @@ def _init_db_conn(rds_host, db_username, db_password, db_name):
         raise exc
 
 
-def _get_secret(secret_name, region='us-east-1'):
+def _get_secret(secret_name, region=_region_name):
 
     # Create a Secrets Manager client
     session = boto3.session.Session()

@@ -85,7 +85,7 @@ class LambdaRdsExampleStack(Stack):
         # self.bastion_sg.add_ingress_rule(ec2.Peer.any_ipv4(), # any machine is allowed to ssh
         #                                  ec2.Port.tcp(22),
         #                                 description='SSH Access')
-        bastion_sg.add_ingress_rule(ec2.Peer.ipv4('73.209.223.60/32'),  # only my machine
+        bastion_sg.add_ingress_rule(ec2.Peer.ipv4('xxx.xxx.xxx.xxx/32'),  # only my machine
                                     ec2.Port.tcp(22),
                                     description='SSH Access')
 
@@ -93,7 +93,7 @@ class LambdaRdsExampleStack(Stack):
         db_connection_sg = ec2.SecurityGroup(self, id=f'{resource_prefix}-proxy2db-sg',
                                              description='Proxy to DB Connection',
                                              vpc=vpc,
-                                             allow_all_outbound=True
+                                             allow_all_outbound=False
                                              )
         db_connection_sg.add_ingress_rule(peer=db_connection_sg,
                                           connection=ec2.Port.tcp(3306),
@@ -144,7 +144,7 @@ class LambdaRdsExampleStack(Stack):
          
          Add the following policy to person running the command.  After I did this, the AWSServiceRoleForRDS showed up as a Role.
          
-         {
+{
     "Version": "2012-10-17",
     "Statement": [
         {
@@ -178,7 +178,6 @@ class LambdaRdsExampleStack(Stack):
                                             ec2.InstanceType.of(ec2.InstanceClass.BURSTABLE2, ec2.InstanceSize.MICRO),
                                             vpc=vpc,
                                             vpc_subnets=ec2.SubnetSelection(
-                                                # this will create the ec2 instance in one of the PUBLIC subnets of the VPC that we just defined above
                                                 subnet_type=ec2.SubnetType.PRIVATE_ISOLATED
                                             ),
                                             database_name=db_name,

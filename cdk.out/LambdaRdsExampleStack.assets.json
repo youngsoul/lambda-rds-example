@@ -1,20 +1,20 @@
 {
   "version": "16.0.0",
   "files": {
-    "d717a4bac1d5a898538a596c17e4fbe0dbcaaa0e62c25cacc9031c78fa13553d": {
+    "52a23409cd56cf3b6ebb6f34aa7532f816dd81ffa55ba615da6905c90f4b356a": {
       "source": {
-        "path": "asset.d717a4bac1d5a898538a596c17e4fbe0dbcaaa0e62c25cacc9031c78fa13553d",
+        "path": "/Users/patrickryan/Development/aws/cdk-sandbox/lambda-rds-example/rds_lambda",
         "packaging": "zip"
       },
       "destinations": {
         "current_account-current_region": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "d717a4bac1d5a898538a596c17e4fbe0dbcaaa0e62c25cacc9031c78fa13553d.zip",
+          "objectKey": "52a23409cd56cf3b6ebb6f34aa7532f816dd81ffa55ba615da6905c90f4b356a.zip",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
     },
-    "85a6197a2ff29b2165905acd89b1db8eac63f23b3495e52866eb2a9653928c33": {
+    "61e4cc760a038238c2d317475cf7bfb19ecee86e99c7899508db27483049d756": {
       "source": {
         "path": "LambdaRdsExampleStack.template.json",
         "packaging": "file"
@@ -22,7 +22,7 @@
       "destinations": {
         "current_account-current_region": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "85a6197a2ff29b2165905acd89b1db8eac63f23b3495e52866eb2a9653928c33.json",
+          "objectKey": "61e4cc760a038238c2d317475cf7bfb19ecee86e99c7899508db27483049d756.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }

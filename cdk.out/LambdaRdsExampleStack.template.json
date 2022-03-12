@@ -598,13 +598,6 @@
       "Type": "AWS::EC2::SecurityGroup",
       "Properties": {
         "GroupDescription": "Proxy to DB Connection",
-        "SecurityGroupEgress": [
-          {
-            "CidrIp": "0.0.0.0/0",
-            "Description": "Allow all outbound traffic by default",
-            "IpProtocol": "-1"
-          }
-        ],
         "VpcId": {
           "Ref": "lambdardsVpc2146D468"
         }
@@ -717,6 +710,40 @@
       },
       "Metadata": {
         "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-proxy2db-sg/from LambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30:{IndirectPort}"
+      }
+    },
+    "lambdardsproxy2dbsgtoLambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30IndirectPort69955AEC": {
+      "Type": "AWS::EC2::SecurityGroupEgress",
+      "Properties": {
+        "GroupId": {
+          "Fn::GetAtt": [
+            "lambdardsproxy2dbsg08928C4C",
+            "GroupId"
+          ]
+        },
+        "IpProtocol": "tcp",
+        "Description": "Allow connections to the database Instance from the Proxy",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "lambdardsproxy2dbsg08928C4C",
+            "GroupId"
+          ]
+        },
+        "FromPort": {
+          "Fn::GetAtt": [
+            "lambdardsDBInstanceE24F7D33",
+            "Endpoint.Port"
+          ]
+        },
+        "ToPort": {
+          "Fn::GetAtt": [
+            "lambdardsDBInstanceE24F7D33",
+            "Endpoint.Port"
+          ]
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-proxy2db-sg/to LambdaRdsExampleStacklambdardsproxy2dbsg13C0ED30:{IndirectPort}"
       }
     },
     "lambdardsDBCredentialsSecretC599BE51": {
@@ -1112,7 +1139,7 @@
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
           },
-          "S3Key": "d717a4bac1d5a898538a596c17e4fbe0dbcaaa0e62c25cacc9031c78fa13553d.zip"
+          "S3Key": "52a23409cd56cf3b6ebb6f34aa7532f816dd81ffa55ba615da6905c90f4b356a.zip"
         },
         "Role": {
           "Fn::GetAtt": [
@@ -1160,7 +1187,7 @@
       ],
       "Metadata": {
         "aws:cdk:path": "LambdaRdsExampleStack/lambda-rds-function/Resource",
-        "aws:asset:path": "asset.d717a4bac1d5a898538a596c17e4fbe0dbcaaa0e62c25cacc9031c78fa13553d",
+        "aws:asset:path": "/Users/patrickryan/Development/aws/cdk-sandbox/lambda-rds-example/rds_lambda",
         "aws:asset:is-bundled": true,
         "aws:asset:property": "Code"
       }
@@ -1274,7 +1301,7 @@
     "CDKMetadata": {
       "Type": "AWS::CDK::Metadata",
       "Properties": {
-        "Analytics": "v2:deflate64:H4sIAAAAAAAA/31STW/bMAz9LbnLapqih92WpFuby2YkRa8FrbCOFlsyJKpdIPi/Tx/+CFpgJz5Sj+SjyBW/ved+uYAPW4jjuWhkxf2BQJxZCL16FCvuXzrBtm/qpdyy0lWNFAdXKaQYm9FeO8JnqBqc43Nsba0WEkhqNZEj+LEro/kF9AiEH3BhpZHvAc6Fd4rQBDwSspLBW1PQempRETugcEbS5dFo1yUN/w3sVG3QWrZTlkAJzK0y7plFYZBsCwpqNOFLkj8UiSibZzA10pWIifD5pWfmaLl/AIIKLE5d85yTxIfNl8BEHXNLo/9e8ttnmLum5J5JaLnf67yQZEsdlpf4MxrLh/w32cTR717B2jA8X0cTfL5x4oy0Cb1ZA211BO5D5k+nxLjQEk0rrQ1ez6CTdd7O+yoR150cF1mbrzcQzq3Gvmd7tNqZvIkSDLQYFs+SiEiRqo4vvx11Ll/cFX+r1VFSar8soOlOwJeL78NV30Trs/Kiu9BJq4FTJmca5Fr5wPBPRF0cINosOaLrWaI/zNCzXPHmjn/jt8vFHytlYZwi2SLfZ/sPsCVrKnMDAAA="
+        "Analytics": "v2:deflate64:H4sIAAAAAAAA/31Sy04rMQz9lu4zoRSxYEdbuNANjFrEFnlSM83tTDJKHLjVaP795jGPikqsfOwc28exF/z6lrfzGXzbTOyPWSUL3u4IxJH50EeLYsHb90aw9ad6z9csd0Ulxc4VCinEJrTVjvANigqn+BRbWquFBJJajeQAHjd5MC9AT0D4DSeWG/nl4VR4owiNxwMhKem9JXmthxoVsR0KZySdnox2TdTwa2CjSoPWXsQfU3ijLIESmBQk3DGLwiDZGhSUaPxPRb+vEVAyb2BKpDNtI+HnS8fM3vL2AQgKsDh2TeOPyh9WF4GROuTmRv87pbefMHWNyR2TUPN2q9Oeos2132nkT2go7/M/ZRVGv/kAa/3wfBmM9/nKiSPSyvdmFdTFHnjrM/84JYY952hqaa33OgaNLNPSvhaRuGzksN/SXJ6Gv8ISu45t0Wpn0iZyMFCjvwcWRQSKVGV4eXXUuHSIZ/y1VntJsf08g6o5AJ/P7vtjvwq2Tcqz5kQHrXpOHp1xkHPlPaN9JmrCAMEmyQGdzxL8foaOpYpXN/yOX89nf62UmXGKZI18m+x/mlL5QIoDAAA="
       },
       "Metadata": {
         "aws:cdk:path": "LambdaRdsExampleStack/CDKMetadata/Default"
