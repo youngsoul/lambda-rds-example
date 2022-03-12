@@ -20,7 +20,7 @@ from constructs import Construct
 
 resource_prefix = 'lambda-rds'
 mysql_port = 3306
-db_username = "retireddev"
+db_username = "mydbuser"
 db_name = "testdb"
 
 
