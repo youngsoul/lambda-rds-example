@@ -1,5 +1,6 @@
 
 # Lambda / RDS CDK Example
+![LRDSSIMPLE](./media/title_splash.png)
 
 ![LRDS](./docs/LambdaRDSNetwork.drawio.png)
 
