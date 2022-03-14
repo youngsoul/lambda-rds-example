@@ -1,4 +1,3 @@
-
 # Lambda / RDS CDK Example
 ![LRDSSIMPLE](./media/title_splash.png)
 
